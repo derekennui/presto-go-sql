@@ -12,7 +12,7 @@ import (
 
 func main() {
 	prestoUrl := "http://user@localhost:8080?catalog=mysql&schema=test"
-	sqlExe := "select * from mysql.test.test limit 10"
+	sqlExe := "select * from mysql.test.Persons"
 	content, _ := ExePrestoSqlQuery(prestoUrl, sqlExe)
 	fmt.Println("query result :  ", string(content))
 }
@@ -104,8 +104,8 @@ func ExePrestoSqlQuery(prestoUrl string, sqlExe string) ([]byte, error) {
 		data := make(map[string]interface{})
 		for i, v := range values {
 			data[columns[i]] = v
-			slice = append(slice, data)
 		}
+		slice = append(slice, data)
 	}
 
 	return json.Marshal(slice)
